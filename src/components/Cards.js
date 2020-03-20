@@ -9,11 +9,12 @@ const MemberCards = ({ formData }) => {
         <Grid.Column width={3} key={index}>
           <Card>
             <Card.Content>
-              <Card.Header>{"Table " + tableData.table}</Card.Header>
+              <Card.Header>{tableData.name}</Card.Header>
+              <Card.Meta>{"Age: " + tableData.age}</Card.Meta>
               <Card.Description>
-                {tableData.dishes.map(dish => (
+                {/* {tableData.dishes.map(dish => (
                   <li>{dish}</li>
-                ))}
+                ))} */}
               </Card.Description>
             </Card.Content>
           </Card>

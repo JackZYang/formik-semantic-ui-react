@@ -7,7 +7,7 @@ function App() {
   const [formData, setFormData] = useState([]);
   return (
     <div>
-      <h1>Restaurant Orders</h1>
+      <h1>Formik Form with Semantic UI</h1>
       <MemberForm formData={formData} setFormData={setFormData} />
       <MemberCards formData={formData} />
     </div>

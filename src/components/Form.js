@@ -6,65 +6,33 @@ import * as Yup from "yup";
 import "./Form.css";
 
 const validationSchema = Yup.object().shape({
-  table: Yup.number().required("Required"),
-  dishes: Yup.string().required("Required")
+  name: Yup.string().required("Required"),
+  age: Yup.number()
+    .required("Required")
+    .integer()
+    .positive("Must be an age")
+    .lessThan(125, "You are probably not that old")
 });
 
-const dishOptions = [
-  {
-    key: "Fish and Chips",
-    text: "Fish and Chips",
-    value: "Fish and Chips"
-  },
-  {
-    key: "Potato Cakes",
-    text: "Potato Cakes",
-    value: "Potato Cakes"
-  }
-];
-
 const MemberForm = ({ formData, setFormData }) => {
-  const [dropValue, setDropValue] = useState("");
   return (
     <Formik
-      initialValues={{ table: "", dishes: [] }}
+      initialValues={{ name: "", age: "", streetNo: "" }}
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting, resetForm }) => {
         setFormData([...formData, values]);
         setSubmitting(false);
-        resetForm();
+        resetForm({});
       }}
     >
       {({ values }) => (
         <FormikForm className="form">
-          <TextInput label="Table" name="table" type="number" />
-          <TextInput label="Quantity" name="quantity" type="number" />
-          <Dropdown
-            label="Dish"
-            value={dropValue}
-            placeholder="Select Dish"
-            options={dishOptions}
-            onChange={(e, { value }) => {
-              values.quantity &&
-                values.dishes.push(values.quantity + " x " + value);
-              setDropValue(value);
-              console.log(values);
-            }}
-            search
-            selection
-            fluid
-          />
-          {values.dishes &&
-            values.dishes.map((dish, index) => (
-              <Label className="dish" key={index}>
-                {dish}
-              </Label>
-            ))}
-          <div>
-            <Button type="submit" color="purple">
-              Add
-            </Button>
-          </div>
+          <TextInput label="Name" name="name" />
+          <TextInput label="Age" name="age" type="number" />
+          <TextInput label="Street Number" name="streetNo" type="number" />
+          <Button type="submit" color="purple">
+            Add
+          </Button>
         </FormikForm>
       )}
     </Formik>
